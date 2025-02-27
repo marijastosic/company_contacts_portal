@@ -1,0 +1,52 @@
+<odoo>
+    <template id="portal_company_contacts" name="Company Contacts" inherit_id="portal.portal_layout">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <script type="text/javascript" src="/company_contacts_portal/static/src/js/messaging.js"></script>
+            <section>
+                <t t-if="contacts">
+                    <h2>Company Contacts</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="contacts" t-as="contact">
+                                <tr>
+                                    <td>
+                                        <t t-esc="contact.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="contact.email"/>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary send-message" t-att-contact-id="contact.id">Send
+                                            Message
+                                        </button>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </section>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_extend" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[@class='o_portal_docs row g-2']" position="inside">
+            <div class="o_portal_category row g-2 mt-3">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/company_contacts_portal/static/description/icon.png'"/>
+                    <t t-set="title">Company Contacts</t>
+                    <t t-set="text">View and manage your company contacts</t>
+                    <t t-set="url" t-value="'/my/company_contacts'"/>
+                    <t t-set="config_card" t-value="True"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
